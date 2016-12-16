@@ -1,5 +1,5 @@
 #include	"unp.h"
-#include	<time.h>
+#include	<string.h>
 
 int
 main(int argc, char **argv)
@@ -16,7 +16,7 @@ main(int argc, char **argv)
 	bzero(&servaddr, sizeof(servaddr));
 	servaddr.sin_family      = AF_INET;
 	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-	servaddr.sin_port        = htons(8000);	/* daytime server */
+	servaddr.sin_port        = htons(7001);	/* daytime server */
 
 	Bind(listenfd, (SA *) &servaddr, sizeof(servaddr));
 
@@ -24,19 +24,23 @@ main(int argc, char **argv)
 
 	for ( ; ; ) {
 		connfd = Accept(listenfd, (SA *) NULL, NULL);
-		while(strcmp(recvline,"exit")){
+		while(strcmp(recvline,"exit\r\n")){
 	    if ( (n = read(connfd, recvline, MAXLINE)) > 0) {
 			recvline[n] = 0;	/* null terminate */
 			fputs("server-recvmsg:",stdout);
 			if (fputs(recvline, stdout) == EOF)
 				err_sys("fputs error");
+			int a,b;
+			sscanf(recvline, "%d %d", &a, &b);
+			//fputs("server said:",stdout);
+			//fgets(buff, MAXLINE-1, stdin);
+			snprintf(buff, sizeof(buff), "add: %d\r\nsub: %d\r\nmul: %d\r\ndiv: %f\r\n", a+b,a-b,a*b,(float)a/(float)b);
+			Write(connfd, buff, strlen(buff));
 		}
         //ticks = time(NULL);
-        //snprintf(buff, sizeof(buff), "%.24s\r\n", ctime(&ticks));
+
         //Write(connfd, buff, strlen(buff));
-		fputs("server said:",stdout);
-		fgets(buff, MAXLINE-1, stdin);
-        Write(connfd, buff, strlen(buff));
+
 		}
 		Close(connfd);
 	}

@@ -23,13 +23,12 @@ main(int argc, char **argv)
 
 	Listen(listenfd, LISTENQ);
 
-	maxfd = max(listenfd, fileno(stdin));			/* initialize */
+	maxfd = listenfd;			/* initialize */
 	maxi = -1;					/* index into client[] array */
 	for (i = 0; i < FD_SETSIZE; i++)
 		client[i] = -1;			/* -1 indicates available entry */
 	FD_ZERO(&allset);
 	FD_SET(listenfd, &allset);
-	FD_SET(fileno(stdin), &allset);
 /* end fig01 */
 
 /* include fig02 */
@@ -64,20 +63,6 @@ main(int argc, char **argv)
 				continue;				/* no more readable descriptors */
 		}
 
-		if (FD_ISSET(fileno(stdin), &rset)) {  /* input is readable */
-			if ( (n = Read(fileno(stdin), buf, MAXLINE)) == 0) {
-				// stdineof = 1;
-				// Shutdown(sockfd, SHUT_WR);	/* send FIN */
-				// FD_CLR(fileno(fp), &rset);
-				continue;
-			}
-			for (i = 0; i <= maxi; i++) {	/* check all clients for data */
-				if ( (sockfd = client[i]) < 0)
-					continue;
-				Write(sockfd, buf, strlen(buf));
-			}
-		}
-
 		for (i = 0; i <= maxi; i++) {	/* check all clients for data */
 			if ( (sockfd = client[i]) < 0)
 				continue;
@@ -88,8 +73,15 @@ main(int argc, char **argv)
 					FD_CLR(sockfd, &allset);
 					client[i] = -1;
 				} else{
-          //Write(sockfd, buf, strlen(buf));
-					printf("client said: %s", buf);
+          int a,b;
+    			int err = sscanf(buf, "%d %d", &a, &b);
+    			//fputs("server said:",stdout);
+    			//fgets(buff, MAXLINE-1, stdin);
+          if(err > 0)
+    			   snprintf(buf, sizeof(buf), "add: %d\r\nsub: %d\r\nmul: %d\r\ndiv: %f\r\n", a+b,a-b,a*b,(float)a/(float)b);
+          else
+             snprintf(buf, sizeof(buf), "%s", "wrong input");
+          Write(sockfd, buf, strlen(buf));
         }
 
 				if (--nready <= 0)

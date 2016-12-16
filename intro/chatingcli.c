@@ -16,18 +16,18 @@ main(int argc, char **argv)
 
 	bzero(&servaddr, sizeof(servaddr));
 	servaddr.sin_family = AF_INET;
-	servaddr.sin_port   = htons(8000);	/* daytime server */
+	servaddr.sin_port   = htons(7001);	/* daytime server */
 	if (inet_pton(AF_INET, argv[1], &servaddr.sin_addr) <= 0)
 		err_quit("inet_pton error for %s", argv[1]);
 
 	if (connect(sockfd, (SA *) &servaddr, sizeof(servaddr)) < 0)
 		err_sys("connect error");
-	
+
 	while(strcmp(buff, "exit")){
 	fputs("client said:",stdout);
 	fgets( buff,MAXLINE-1,stdin);
 	//printf("%d,%s", strlen(buff), buff);
-    Write(sockfd,buff, strlen(buff));
+  Write(sockfd,buff, strlen(buff));
 	if ( (n = read(sockfd, recvline, MAXLINE)) > 0) {
 		fputs("client recv:",stdout);
 		recvline[n] = 0;	/* null terminate */

@@ -3,7 +3,8 @@ include ../Make.defines
 PROGS =	daytimetcpcli daytimetcpcli1 daytimetcpcli2 daytimetcpcli3 \
 		daytimetcpsrv daytimetcpsrv1 daytimetcpsrv2 daytimetcpsrv3 \
 		daytimetcpcliv6 daytimetcpsrvv6 \
-		byteorder chatingcli chatingsrv calculatorsrc
+		byteorder chatingcli chatingsrv calculatorsrv \
+		selectsrv selectcli
 
 all:	${PROGS}
 
@@ -46,8 +47,14 @@ chatingcli: chatingcli.o
 chatingsrv: chatingsrv.o
 		${CC} ${CFLAGS} -o $@ chatingsrv.o ${LIBS}
 
-calculatorsrc: calculatorsrc.o
-		${CC} ${CFLAGS} -o $@ calculatorsrc.o ${LIBS}
-		
+calculatorsrv: calculatorsrv.o
+		${CC} ${CFLAGS} -o $@ calculatorsrv.o ${LIBS}
+
+selectsrv: selectsrv.o
+		${CC} ${CFLAGS} -o $@ selectsrv.o ${LIBS}
+
+selectcli: selectcli.o
+		${CC} ${CFLAGS} -o $@ selectcli.o ${LIBS}
+
 clean:
 		rm -f ${PROGS} ${CLEANFILES}
