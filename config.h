@@ -2,7 +2,7 @@
 /* config.h.in.  Generated from configure.in by autoheader.  */
 
 /* CPU, vendor, and operating system */
-#define CPU_VENDOR_OS "i386-unknown-freebsd11.0"
+#define CPU_VENDOR_OS "x86_64-unknown-linux-gnu"
 
 /* Define to 1 if <netdb.h> defines struct addrinfo */
 #define HAVE_ADDRINFO_STRUCT 1
@@ -86,10 +86,10 @@
 #define HAVE_INET_PTON_PROTO 1
 
 /* Define to 1 if you have the `kevent' function. */
-#define HAVE_KEVENT 1
+/* #undef HAVE_KEVENT */
 
 /* Define to 1 if you have the `kqueue' function. */
-#define HAVE_KQUEUE 1
+/* #undef HAVE_KQUEUE */
 
 /* Define to 1 if you have the `nsl' library (-lnsl). */
 /* #undef HAVE_LIBNSL */
@@ -113,7 +113,7 @@
 #define HAVE_MSGHDR_MSG_CONTROL 1
 
 /* Define to 1 if you have the <netconfig.h> header file. */
-#define HAVE_NETCONFIG_H 1
+/* #undef HAVE_NETCONFIG_H */
 
 /* Define to 1 if you have the <netdb.h> header file. */
 #define HAVE_NETDB_H 1
@@ -125,7 +125,7 @@
 #define HAVE_NETINET_IN_H 1
 
 /* Define to 1 if you have the <net/if_dl.h> header file. */
-#define HAVE_NET_IF_DL_H 1
+/* #undef HAVE_NET_IF_DL_H */
 
 /* Define to 1 if you have the `poll' function. */
 #define HAVE_POLL 1
@@ -152,10 +152,10 @@
 #define HAVE_SNPRINTF_PROTO 1
 
 /* Define to 1 if <net/if_dl.h> defines struct sockaddr_dl */
-#define HAVE_SOCKADDR_DL_STRUCT 1
+/* #undef HAVE_SOCKADDR_DL_STRUCT */
 
 /* define if socket address structures have length fields */
-#define HAVE_SOCKADDR_SA_LEN 1
+/* #undef HAVE_SOCKADDR_SA_LEN */
 
 /* Define to 1 if you have the `sockatmark' function. */
 #define HAVE_SOCKATMARK 1
@@ -176,7 +176,7 @@
 #define HAVE_STRING_H 1
 
 /* Define to 1 if you have the <stropts.h> header file. */
-/* #undef HAVE_STROPTS_H */
+#define HAVE_STROPTS_H 1
 
 /* Define to 1 if `ifr_mtu' is member of `struct ifreq'. */
 #define HAVE_STRUCT_IFREQ_IFR_MTU 1
@@ -185,10 +185,10 @@
 #define HAVE_STRUCT_SOCKADDR_STORAGE 1
 
 /* Define to 1 if you have the <sys/event.h> header file. */
-#define HAVE_SYS_EVENT_H 1
+/* #undef HAVE_SYS_EVENT_H */
 
 /* Define to 1 if you have the <sys/filio.h> header file. */
-#define HAVE_SYS_FILIO_H 1
+/* #undef HAVE_SYS_FILIO_H */
 
 /* Define to 1 if you have the <sys/ioctl.h> header file. */
 #define HAVE_SYS_IOCTL_H 1
@@ -203,7 +203,7 @@
 #define HAVE_SYS_SOCKET_H 1
 
 /* Define to 1 if you have the <sys/sockio.h> header file. */
-#define HAVE_SYS_SOCKIO_H 1
+/* #undef HAVE_SYS_SOCKIO_H */
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1
@@ -311,10 +311,10 @@
 /* #undef ssize_t */
 
 /* scalar type */
-#define t_scalar_t int32_t
+/* #undef t_scalar_t */
 
 /* unsigned scalar type */
-#define t_uscalar_t uint32_t
+/* #undef t_uscalar_t */
 
 /* 16 bit unsigned type */
 /* #undef uint16_t */
